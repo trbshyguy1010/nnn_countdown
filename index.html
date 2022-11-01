@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+    <title>No Nut November Countdown...</title>
+</head>
+
+<body>
+    <div class="bg-image"></div>
+    <div class="block">
+    <h1 id="msg" style="font-size: 50px"></h1>
+    <h1>Time until no nut november ends</h1>
+    <h2 id="counter"></h2>
+    <h2><u>About No Nut November (NNN)</u></h2>
+    <p>No Nut November (NNN) is an internet challenge revolving around abstinence from masturbation, sex and ejaculation (or colloquially "to nut") during the month of November. It originated in late 2010 and grew in popularity on social media during and after 2017.</p>
+    <script>
+        const msg_table = [
+            "HOLD IT!",
+            "HAH! Caught you slackin'...",
+            "Not today, Sir!",
+            "Why...",
+            "Stop it, Get some help :/"
+        ];
+        document.getElementById("msg").innerHTML = "<i><u>"+msg_table[Math.floor(Math.random() * msg_table.length)]+"</u></i>";
+        const jsConfetti = new JSConfetti();
+        const timeUntilNNNends = new Date("Dec 1, 2022 00:00:00").getTime();
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var difference = timeUntilNNNends - now;
+
+            var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            document.getElementById("counter").innerHTML = days + "d, "
+                                                        + hours + "hrs, "
+                                                        + minutes + "mins, "
+                                                        + seconds + "s";
+            if ((difference < 0)) { 
+                clearInterval(x); 
+                document.getElementById("counter").innerHTML = "Hooray!!! You survived No Nut November!!!"
+                jsConfetti.addConfetti({
+                confettiNumber: 200,
+                confettiColors: [
+                    '#fc0703', '#71e381', '#40addb', '#8179d1', '#e3de44', '#d179c4'
+                ]
+            });
+            }
+        }, 1000);
+        const el = document.querySelector('.bg-image');
+        el.addEventListener("mousemove", (e) => {
+            let { offsetX: x, offsetY: y } = e;
+            el.style.backgroundPositionX = -x / 50 + "px";
+            el.style.backgroundPositionY = -y / 50 + "px";
+        })
+    </script>
+    </div>
+</body>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+    * { box-sizing: border-box;}
+    body, html {
+        font-family: 'JetBrains Mono', monospace;
+        background-color: black;
+        color: white;
+        text-align: center;
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+    }
+    .bg-image {
+        transition: transform .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        background-image: url('se.jpg');
+        filter: blur(8px);
+        -webkit-filter: blur(8px);
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .bg-image:hover {
+        transform: scale(1.05);
+    }
+    .block {
+        background-color: rgb(0,0,0);
+        background-color: rgba(0, 0, 0, 0.534);
+        color: white;
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 80%;
+        padding: 20px;
+        text-align: center;
+        border: 3px dashed white;
+        border-radius: 20px;
+        cursor: default;
+    }
+</style>
+</html>
